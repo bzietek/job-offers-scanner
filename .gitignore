@@ -1,0 +1,9 @@
+# data
+data/
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+
+# secrets
+.env
