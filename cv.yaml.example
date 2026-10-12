@@ -1,0 +1,53 @@
+# Example CV file. Copy it to cv.yaml and fill in your own data.
+# cv.yaml is listed in .gitignore 
+
+skills:
+  # level: basic | intermediate | advanced
+  # category: programming language | library | tool | concept | method
+  - name: Python
+    level: intermediate
+    category: programming language
+
+  - name: SQL
+    level: basic
+    category: programming language
+
+  - name: Pandas
+    level: intermediate
+    category: library
+
+  - name: Docker
+    level: basic
+    category: tool
+
+  - name: feature engineering
+    level: basic
+    category: concept
+
+preferences:
+  # work_modes: remote | hybrid | office
+  work_modes: [remote, hybrid]
+  # cities apply to hybrid and office offers
+  cities: [Example City, Neighbour Town]
+
+languages:
+  # native or CEFR level (A1-C2)
+  Polish: native
+  English: B2
+
+certifications:
+  - name: Example Course
+    content: short description of what the course covered
+
+projects:
+  - name: Example Project (personal project)
+    stack: [Python, scikit-learn, Pandas]
+
+status:
+  student: true
+  availability: full-time  # full-time | part-time
+  bachelors: true
+  masters: in progress
+
+additional_skills:
+  - free-text description of other skills

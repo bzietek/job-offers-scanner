@@ -3,6 +3,7 @@ import requests
 import re
 import json
 from datetime import datetime
+from collections import Counter
 
 
 r = requests.get('https://justjoin.it/sitemaps/active-jobs/part0.xml')
@@ -23,5 +24,16 @@ for url in root:
                     "category": job_category,
                     "lastmod": lastmod.text})
 
+
+# TODO: it can be done in one line
+def count_offers_per_category(offers):
+    categories = []
+    for offer in offers:
+        categories.append(offer["category"])
+    return Counter(categories)
+
+
+
+print(count_offers_per_category(offers))
 with open(f"./data/offers_{datetime.today().strftime('%Y-%m-%d')}.json", "w", encoding="utf-8") as f:
     json.dump(offers, f, ensure_ascii=False, indent=2)

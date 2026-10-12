@@ -1,9 +1,11 @@
 # data
 data/
+cv.yaml
 
 # Python
 __pycache__/
 .ipynb_checkpoints/
+playground.py
 
 # secrets
 .env
