@@ -4,10 +4,37 @@ import re
 import json
 from datetime import datetime
 from collections import Counter
+import time
+from http import HTTPStatus
+from requests.exceptions import HTTPError
 
+initial_url = "https://justjoin.it/sitemaps/active-jobs/part0.xml"
+retries = 3
+retry_codes = [
+    HTTPStatus.TOO_MANY_REQUESTS,
+    HTTPStatus.INTERNAL_SERVER_ERROR,
+    HTTPStatus.BAD_GATEWAY,
+    HTTPStatus.SERVICE_UNAVAILABLE,
+    HTTPStatus.GATEWAY_TIMEOUT,
+]
 
-r = requests.get('https://justjoin.it/sitemaps/active-jobs/part0.xml')
-root= ET.fromstring(r.content)
+for n in range(retries):
+    try:
+        response = requests.get(initial_url)
+        response.raise_for_status()
+
+        break
+
+    except HTTPError as exc:
+        code = exc.response.status_code
+
+        if code in retry_codes:
+            time.sleep(n)
+            continue
+
+        raise
+
+root= ET.fromstring(response.content)
 offers = []
 ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 
@@ -20,7 +47,9 @@ for url in root:
         job_category = parts[-2]
     else: 
         job_category = parts[-1]
-    offers.append({"url" : loc.text,
+
+    if job_category in ['data', 'analytics', 'ai', 'python', 'other']:
+        offers.append({"url" : loc.text,
                     "category": job_category,
                     "lastmod": lastmod.text})
 
