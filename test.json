@@ -1,0 +1,63 @@
+{
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "datePosted": "2026-10-14T10:04:44.3217141Z",
+    "description": "Technologia, która robi różnicę  Green Hive Technology to software house w Grupie Żabka, w którym tworzymy cyfrowe rozwiązania napędzające rozwój jednego z największych ekosystemów convenience w Polsce. Realizujemy projekty obejmujące rozwój aplikacji Żappka, inicjatywy z obszaru data science wspierające franczyzobiorców, rozwiązania wykorzystujące generatywną sztuczną inteligencję (genAI) oraz inne innowacyjne produkty cyfrowe. 💚 Aktualnie poszukujemy Finance & Data Analyst! Co będzie należało do Twoich zadań?  analiza danych finansowych - budżetowanie, forecasting i modelowanie biznesowe realizowane bezpośrednio w systemie klasy EPM (Anaplan); projektowanie i wdrażanie automatyzacji procesów zbierania oraz przetwarzania danych z wykorzystaniem SQL i Python - z mierzalnym efektem w postaci eliminacji manualnych procesów; budowa i utrzymanie raportów oraz dashboardów zarządczych wspierających decyzje biznesowe; diagnozowanie problemów w raportowaniu, zbieranie wymagań od interesariuszy i dostarczanie gotowych rozwiązań analitycznych; identyfikowanie usprawnień w istniejących modelach i procesach oraz samodzielne wdrażanie zmian w platformie.  Kogo szukamy? posiadasz minimum 3-letnie doświadczenie w obszarze controllingu, analizy danych lub pokrewnym; masz doświadczenie w praktycznym zastosowaniu SQL, Python, DAX; swobodnie poruszasz się w środowisku dużych zbiorów danych finansowych, analiz kosztów i modeli budżetowych; swobodnie poruszasz się w środowisku dużych zbiorów danych finansowych, analiz kosztów i modeli budżetowych; potrafisz wyciągać wnioski z analiz i przekładać je na konkretne rekomendacje biznesowe; potrafisz działać samodzielnie i elastycznie dostosowywać zakres dostarczanych rozwiązań do zmieniających się potrzeb; jesteś otwarty na naukę narzędzi klasy EPM - znajomość Anaplan, Jedox, Oracle, OneStream lub SAP SAC będzie dodatkowym atutem. Co oferujemy? współpracę w oparciu o kontrakt B2B; możliwość skorzystania z naszych biur w Poznaniu i Warszawie; możliwość skorzystania z preferencyjnych warunków m.in. na kartę MultiSport, prywatną opiekę medyczną LuxMed oraz ubezpieczenie grupowe Uniqa. Dodatkowo możliwość uzyskania zniżek na Maczfit i w sklepach Samsung, a także możliwość zakupu lub wynajmu samochodu osobowego na korzystnych warunkach rabatowych.  A do tego: realny wpływ na technologie, z których codziennie korzystają miliony ludzi; miejsce, gdzie Twoje pomysły są słyszane i mają znaczenie; współpraca z ekspertami i ekspertkami z różnych dziedzin; możliwość testowania innowacyjnych rozwiązań.  Jak wygląda nasz proces rekrutacyjny? Wyślij nam swoje CV – uważnie je przeczytamy. Jeśli widzimy wspólny kierunek, odezwiemy się do Ciebie i zaprosimy Cię na krótką rozmowę telefoniczną (ok. 30 minut). Kolejny etap to rozmowa merytoryczna online. Jeśli wszystko pójdzie dobrze – witamy w Green Hive Technology. ",
+    "title": "Finance & Data Analyst (she/he/they)",
+    "validThrough": "2027-01-12T11:01:24.728Z",
+    "employmentType": "OTHER",
+    "jobLocationType": "TELECOMMUTE",
+    "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Green Hive Technology",
+        "sameAs": "",
+        "logo": "https://og-image.justjoin.it/ogimage/justjoinit/green-hive-technology-finance-data-analyst-she-he-they--poznan-data"
+    },
+    "jobLocation": {
+        "@type": "Place",
+        "address"{
+            "@type": "PostalAddress",
+            "addressCountry": "PL",
+            "addressLocality": "Poznań",
+            "addressRegion": "",
+            "postalCode": "",
+            "streetAddress": "Stanisława Matyi 8"
+        }
+    },
+    "applicantLocationRequi ents": {
+        "@type": "Country",
+        "name": "Poland"
+    }
+}
+
+{
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "datePosted": "2026-10-12T09:35:07.652994Z",
+    "description": "Svitla Systems Inc. is looking for a Data Engineer for a full-time position (40 hours per week) in Europe. Our client is one of the world’s largest and fastest-growing job sites.We are looking for a Data Engineer to work embedded within the data engineering function, partnering closely with the data platform team to support a large-scale data platform modernization effort. The role centers on migrating approximately 1,000 datasets to Snowflake, with Apache Airflow 3 handling orchestration. The core architecture and technical approach are already defined by the client's team, so the focus is on execution rather than design.The overarching objective is to accelerate a set of time-sensitive migrations (Airflow 2 to 3, Confluent region migration, and the move to Iceberg), targeted for completion by the end of March 2027.Coverage until 12:00 PM PTRequirements3+ years of industry experience working with large-scale datasets, including Airflow and Spark.Strong software engineering fundamentals.Hands-on Python development experience.Advanced SQL, including complex joins, CTEs, window functions, and performance tuning.Snowflake data modeling experience.Experience developing and testing pipelines in Apache Airflow and Python.Experience with Apache Kafka.Experience with Apache Spark, including hands-on PySpark.Experience with Iceberg and Parquet data formats.AWS experience, particularly S3 (data lakes, partitioning, and lifecycle policies).Testing strategy experience, with the ability to debug and test code hands-on.Strong communication skills.Ability to work independently.Will be a plusHands-on experience with Snowflake migrations (data warehouse modernization, performance and cost optimization).Experience with Apache Airflow migrations (version upgrades, executor changes, or platform migrations).Experience using AI tools for development.ResponsibilitiesCarry out the migration of approximately 1,000 datasets to Snowflake, with Apache Airflow 3 handling orchestration.Migrate a set of pipelines from Apache Airflow 2 to Airflow 3.Migrate Confluent connections to a new region.Migrate a set of pipelines from Hive to Iceberg using Snowpark Connect.Adapt existing data pipelines to Snowflake while ensuring data quality and reliability throughout.Support workflow scheduling and monitoring in Apache Airflow.We offerUS and EU projects based on advanced technologies.Competitive compensation based on skills and experience.Regular performance appraisals to support your growth.Flexibility in workspace, either remote or our welcoming office.Bonuses for article writing, public talks, and other activities.Generous time off, including vacation, national holidays, sick leaves, and family days.Personalized learning programs tailored to your interests and skill development.Free tech webinars and meetups organized by Svitla.Regular corporate online activities.Awesome team and a friendly, supportive community!",
+    "title": "Data Engineer",
+    "validThrough": "2026-12-12T22:59:59.999Z",
+    "employmentType": "FULL_TIME",
+    "jobLocationType": "TELECOMMUTE",
+    "hiringOrganization": {
+        "@type": "Organization",
+        "name": "Svitla Systems",
+        "sameAs": "",
+        "logo": "https://og-image.justjoin.it/ogimage/justjoinit/svitla-systems-data-engineer-gdansk-data-8b7a8b66"
+    },
+    "jobLocation": {
+        "@type": "Place",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PL",
+            "addressLocality": "Gdańsk",
+            "addressRegion": "",
+            "postalCode": "",
+            "streetAddress": "-"
+        }
+    },
+    "applicantLocationRequirements": {
+        "@type": "Country",
+        "name": "Poland"
+    }
+}
