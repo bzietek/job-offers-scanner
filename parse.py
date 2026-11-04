@@ -1,22 +1,28 @@
-#xml/html na dane
+# xml/html na dane
 import xml.etree.ElementTree as ET
 import re
 from bs4 import BeautifulSoup
 import json
 
+
 def parse_sitemaps(xml: bytes) -> list[dict]:
     root = ET.fromstring(xml)
-    offers = []    
-    ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+    offers = []
+    ns = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
     for entry in root:
-        loc = entry.find('sm:loc', ns)
-        lastmod = entry.find('sm:lastmod', ns)
-        offers.append({"url" : loc.text,
-                       "category": category_from_url(loc.text),
-                       "lastmod": lastmod.text})        
-    
+        loc = entry.find("sm:loc", ns)
+        lastmod = entry.find("sm:lastmod", ns)
+        offers.append(
+            {
+                "url": loc.text,
+                "category": category_from_url(loc.text),
+                "lastmod": lastmod.text,
+            }
+        )
+
     return offers
+
 
 def category_from_url(url: str) -> str:
     parts = url.split("-")
@@ -32,25 +38,42 @@ def parse_offer(html: str, url: str) -> dict | None:
     # The page returns HTTP 200 but shows "Offer expired" instead of the offer
     if soup.find(string="Offer expired"):
         return None
-    
+
     json_ld = soup.find("script", type="application/ld+json")
     json_ld_data = json.loads(json_ld.string)
-    seniority = soup.find("svg", class_="lucide-graduation-cap").parent.find_next_sibling().get_text()
-    work_type = soup.find("svg", class_="lucide-map-pinned").parent.find_next_sibling().get_text()
-    
+    seniority = (
+        soup.find("svg", class_="lucide-graduation-cap")
+        .parent.find_next_sibling()
+        .get_text()
+    )
+    work_type = (
+        soup.find("svg", class_="lucide-map-pinned")
+        .parent.find_next_sibling()
+        .get_text()
+    )
+
     return {
-        "url" : url,
-        "json_ld_data" : json_ld_data,
-        "seniority" : seniority,
-        "work_type": work_type
+        "url": url,
+        "json_ld_data": json_ld_data,
+        "seniority": seniority,
+        "work_type": work_type,
     }
+
 
 if __name__ == "__main__":
     from pathlib import Path
 
     # 1. category_from_url: adres bez kodu i z kodem
-    print(category_from_url("https://justjoin.it/job-offer/firma-data-engineer-krakow-data"))           # data
-    print(category_from_url("https://justjoin.it/job-offer/firma-data-engineer-krakow-data-093aeccd"))  # data
+    print(
+        category_from_url(
+            "https://justjoin.it/job-offer/firma-data-engineer-krakow-data"
+        )
+    )  # data
+    print(
+        category_from_url(
+            "https://justjoin.it/job-offer/firma-data-engineer-krakow-data-093aeccd"
+        )
+    )  # data
 
     # 2. parse_sitemaps na małym XML-u wpisanym w kod
     sample = b"""<?xml version="1.0" encoding="utf-8"?>

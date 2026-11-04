@@ -1,1 +1,1 @@
-#zapis/odczyt
+# zapis/odczyt
