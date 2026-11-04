@@ -1,1 +1,9 @@
 # zapis/odczyt
+def ensure_dirs() -> None: ...                    # tworzy wszystkie foldery, jeśli ich nie ma
+def slug_from_url(url: str) -> str: ...           # końcówka adresu, która służy za nazwę pliku
+def is_already_fetched(slug: str) -> bool: ...    # czy istnieje raw/<slug>.html
+def save_raw_html(slug: str, html: str) -> None: ...
+def load_raw_html(slug: str) -> str: ...
+def save_json(path: Path, data) -> None: ...      # jedna funkcja dla sitemaps, parsed i filtered
+def load_json(path: Path): ...
+def load_cv(path: Path) -> dict: ...              # wczytuje cv.yaml

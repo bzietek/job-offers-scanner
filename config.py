@@ -1,7 +1,14 @@
 # constants
+from pathlib import Path
+
 SITEMAP_URL = "https://justjoin.it/sitemaps/active-jobs/part0.xml"
 USER_AGENT = "job-offers-scanner/0.1 (+https://github.com/bzietek/job-offers-scanner)"
 CATEGORIES = {"data", "analytics", "ai", "python"}
 EXCLUDED_TITLE_WORDS = {"senior", "lead", "manager", "architect"}
 ACCEPTED_SENIORITY = {"Junior", "Mid"}
 REQUEST_DELAY_S = 2
+DATA_DIR = Path("data")
+SITEMAPS_DIR = DATA_DIR / "sitemaps"
+RAW_DIR = DATA_DIR / "raw"
+PARSED_DIR = DATA_DIR / "parsed"
+FILTERED_DIR = DATA_DIR / "filtered"
