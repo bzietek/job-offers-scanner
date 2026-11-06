@@ -59,4 +59,4 @@ if __name__ == "__main__":
     }
     assert passes_cheap_filters(valid_junior_offer) is True
 
-    print("All passed")
+    print("All passed.")

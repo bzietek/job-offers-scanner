@@ -34,8 +34,6 @@ def category_from_url(url: str) -> str:
 def parse_offer(html: str, url: str) -> dict | None:
     soup = BeautifulSoup(html, "html.parser")
 
-    # Soft 404: the active-jobs sitemap can still list expired offers.
-    # The page returns HTTP 200 but shows "Offer expired" instead of the offer
     if soup.find(string="Offer expired"):
         return None
 
@@ -57,25 +55,34 @@ def parse_offer(html: str, url: str) -> dict | None:
         "json_ld_data": json_ld_data,
         "seniority": seniority,
         "work_type": work_type,
+        "city": city_from_json_ld(json_ld_data)
     }
 
+def city_from_json_ld(json_ld_data: dict) -> str | None:
+    location = json_ld_data.get("jobLocation")
+
+    if isinstance(location, list):    
+        location = location[0] if location else None
+    if not location:
+        return None
+    
+    return location.get("address", {}).get("addressLocality")
 
 if __name__ == "__main__":
     from pathlib import Path
 
-    # 1. category_from_url: adres bez kodu i z kodem
     print(
         category_from_url(
             "https://justjoin.it/job-offer/firma-data-engineer-krakow-data"
         )
-    )  # data
+    )
+
     print(
         category_from_url(
             "https://justjoin.it/job-offer/firma-data-engineer-krakow-data-093aeccd"
         )
-    )  # data
+    )
 
-    # 2. parse_sitemaps na małym XML-u wpisanym w kod
     sample = b"""<?xml version="1.0" encoding="utf-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -85,7 +92,6 @@ if __name__ == "__main__":
 </urlset>"""
     print(parse_sitemaps(sample))
 
-    # 3. parse_offer na pierwszym zapisanym pliku z data/raw
     raw_files = list(Path("data/raw").glob("*.html"))
     if not raw_files:
         print("Brak plików w data/raw")
@@ -96,4 +102,4 @@ if __name__ == "__main__":
         if result is None:
             print("Oferta wygasła")
         else:
-            print(result["seniority"], result["work_type"])
+            print(result["seniority"], result["work_type"], result["city"])
