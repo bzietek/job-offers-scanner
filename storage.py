@@ -1,7 +1,12 @@
-from pathlib import Path
-from config import SITEMAPS_DIR, RAW_DIR, PARSED_DIR, FILTERED_DIR
+"""Everything that touches the disk: folders, file paths, raw HTML, JSON and the CV."""
+
 import json
+from datetime import date
+from pathlib import Path
+
 import yaml
+
+from config import FILTERED_DIR, PARSED_DIR, RAW_DIR, SITEMAPS_DIR
 
 
 def ensure_dirs() -> None:
@@ -15,6 +20,18 @@ def slug_from_url(url: str) -> str:
 
 def raw_path(slug: str) -> Path:
     return RAW_DIR / f"{slug}.html"
+
+
+def parsed_path(slug: str) -> Path:
+    return PARSED_DIR / f"{slug}.json"
+
+
+def filtered_path(slug: str) -> Path:
+    return FILTERED_DIR / f"{slug}.json"
+
+
+def sitemap_snapshot_path(day: date) -> Path:
+    return SITEMAPS_DIR / f"{day.isoformat()}.json"
 
 
 def is_already_fetched(slug: str) -> bool:
@@ -38,10 +55,12 @@ def load_json(path: Path):
 
 
 def load_cv(path: Path) -> dict:
-    return yaml.safe_load(path.read_text())
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
+    from config import BASE_DIR
+
     ensure_dirs()
 
     slug = "test-offer"
@@ -51,12 +70,12 @@ if __name__ == "__main__":
     raw_path(slug).unlink()
     assert is_already_fetched(slug) is False
 
-    json_path = PARSED_DIR / "test.json"
+    json_path = parsed_path("test-offer")
     save_json(json_path, {"city": "Dąbrowa Górnicza"})
     assert load_json(json_path) == {"city": "Dąbrowa Górnicza"}
     json_path.unlink()
 
-    cv = load_cv(Path(__file__).parent / "cv.yaml")
-    assert "Katowice" in cv["preferences"]["cities"]
+    cv = load_cv(BASE_DIR / "cv.yaml")
+    assert "Dąbrowa Górnicza" in cv["preferences"]["cities"]
 
-    print("All passed")
+    print("All passed.")

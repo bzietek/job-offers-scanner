@@ -2,17 +2,20 @@ from datetime import date
 
 import requests
 
-from config import BASE_DIR, FILTERED_DIR, PARSED_DIR, SITEMAPS_DIR
+from config import BASE_DIR
 from fetch import create_session, fetch_offer_html, fetch_sitemap
 from filters import passes_cheap_filters, passes_content_filters
 from parse import parse_offer, parse_sitemaps
 from storage import (
     ensure_dirs,
+    filtered_path,
     is_already_fetched,
     load_cv,
     load_raw_html,
+    parsed_path,
     save_json,
     save_raw_html,
+    sitemap_snapshot_path,
     slug_from_url,
 )
 
@@ -29,7 +32,7 @@ def main() -> None:
     # 2. Save sitemap snapshot
     sitemap_xml = fetch_sitemap(session)
     offers = parse_sitemaps(sitemap_xml)
-    save_json(SITEMAPS_DIR / f"{date.today().isoformat()}.json", offers)
+    save_json(sitemap_snapshot_path(date.today()), offers)
 
     # 3. Cheap filters and new offers only
     candidates = [offer for offer in offers if passes_cheap_filters(offer)]
@@ -64,14 +67,14 @@ def main() -> None:
             expired.append(offer)
         else:
             parsed.append(parsed_offer)
-            save_json(PARSED_DIR / f"{slug}.json", parsed_offer)
+            save_json(parsed_path(slug), parsed_offer)
 
     # 6. Content filters
     filtered = []
     for parsed_offer in parsed:
         if passes_content_filters(parsed_offer, cities):
-            slug = slug_from_url(parse_offer["url"])
-            save_json(FILTERED_DIR / f"{slug}.json", parsed_offer)
+            slug = slug_from_url(parsed_offer["url"])
+            save_json(filtered_path(slug), parsed_offer)
             filtered.append(parsed_offer)
 
     # 7. Summary

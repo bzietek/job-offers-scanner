@@ -1,6 +1,22 @@
-import requests
+"""HTTP requests: session, retries, sitemap and offer pages."""
+
 import time
-from config import RETRY_CODES, SITEMAP_URL, USER_AGENT, REQUEST_DELAY_S
+
+import requests
+
+from config import (
+    REQUEST_DELAY_S,
+    REQUEST_TIMEOUT_S,
+    RETRY_CODES,
+    SITEMAP_URL,
+    USER_AGENT,
+)
+
+
+def create_session() -> requests.Session:
+    session = requests.Session()
+    session.headers.update({"User-Agent": USER_AGENT})
+    return session
 
 
 def get_with_retry(
@@ -8,15 +24,12 @@ def get_with_retry(
 ) -> requests.Response:
     for attempt in range(retries):
         try:
-            response = session.get(url, timeout=10)
+            response = session.get(url, timeout=REQUEST_TIMEOUT_S)
             response.raise_for_status()
-
             return response
-
         except requests.HTTPError as exc:
             if exc.response.status_code not in RETRY_CODES:
                 raise
-
         except (requests.ConnectionError, requests.Timeout):
             pass
 
@@ -24,12 +37,6 @@ def get_with_retry(
             time.sleep(2**attempt)
 
     raise RuntimeError(f"Failed to fetch {url} after {retries} attempts.")
-
-
-def create_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update({"User-Agent": USER_AGENT})
-    return session
 
 
 def fetch_sitemap(session: requests.Session) -> bytes:
@@ -44,6 +51,8 @@ def fetch_offer_html(session: requests.Session, url: str) -> str:
 
 
 if __name__ == "__main__":
+    from parse import parse_sitemaps
+
     session = create_session()
 
     response = get_with_retry(session, "https://httpbin.org/status/200")
@@ -62,8 +71,6 @@ if __name__ == "__main__":
         pass
     else:
         raise AssertionError("Expected RuntimeError for 503")
-
-    from parse import parse_sitemaps
 
     offers = parse_sitemaps(fetch_sitemap(session))
     assert len(offers) > 0

@@ -1,5 +1,6 @@
-# filtry
-from config import CATEGORIES, EXCLUDED_TITLE_WORDS, ACCEPTED_SENIORITY
+"""Filtering rules for offers. Pure functions, no I/O."""
+
+from config import ACCEPTED_SENIORITY, CATEGORIES, EXCLUDED_TITLE_WORDS
 
 
 def passes_cheap_filters(offer: dict) -> bool:
@@ -41,20 +42,22 @@ if __name__ == "__main__":
     assert passes_content_filters(junior_hybrid_nearby, cities) is True
 
     # passes_cheap_filters
+    base_url = "https://justjoin.it/job-offer/firma-"
+
     senior_in_title = {
-        "url": "https://justjoin.it/job-offer/firma-senior-data-engineer-katowice-data",
+        "url": base_url + "senior-data-engineer-katowice-data",
         "category": "data",
     }
     assert passes_cheap_filters(senior_in_title) is False
 
     wrong_category = {
-        "url": "https://justjoin.it/job-offer/firma-java-developer-katowice-java",
+        "url": base_url + "java-developer-katowice-java",
         "category": "java",
     }
     assert passes_cheap_filters(wrong_category) is False
 
     valid_junior_offer = {
-        "url": "https://justjoin.it/job-offer/firma-junior-data-analyst-katowice-data",
+        "url": base_url + "junior-data-analyst-katowice-data",
         "category": "data",
     }
     assert passes_cheap_filters(valid_junior_offer) is True
